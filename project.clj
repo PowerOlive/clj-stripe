@@ -1,4 +1,4 @@
-(defproject getlantern/clj-stripe "1.0.5"
+(defproject getlantern/clj-stripe "1.0.6"
   :description "Clojure binding for Stripe"
   :dependencies [[org.clojure/clojure "1.5.0"]
 		 [org.clojure/data.json "0.1.3"]
