@@ -44,30 +44,24 @@
 
 (defn post-request
   "POSTs a to a url using the provided authentication token and parameters."
-  [token url params & idempotency-key]
+  [token url params & headers]
   (try
-    (let [result (if idempotency-key
-                   (client/post url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :query-params params :throw-exceptions false})
-                   (client/post url {:basic-auth [token] :query-params params :throw-exceptions false}))]
+    (let [result (client/post url {:debug true :debug-body true :body :headers headers :basic-auth [token] :query-params params :throw-exceptions false})]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
 
 (defn get-request
   "Issues a GET request to the specified url, using the provided authentication token and parameters."
-  [token url & idempotency-key]
+  [token url & headers]
   (try
-    (let [result (if idempotency-key
-                   (client/get url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :throw-exceptions false})
-                   (client/get url {:basic-auth [token] :throw-exceptions false}))]
+    (let [result (client/get url {:headers headers :basic-auth [token] :throw-exceptions false})]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
 
 (defn delete-request
   "Issues a DELETE request to the specified url, using the provided authentication token and parameters."
-  [token url & idempotency-key]
+  [token url & headers]
   (try
-    (let [result (if idempotency-key
-                   (client/delete url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :throw-exceptions false})
-                   (client/delete url {:basic-auth [token] :throw-exceptions false}))]
+    (let [result (client/delete url {:headers headers :basic-auth [token] :throw-exceptions false})]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
