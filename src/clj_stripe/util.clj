@@ -44,9 +44,11 @@
 
 (defn post-request
   "POSTs a to a url using the provided authentication token and parameters."
-  [token url params & headers]
+  [token url params & [headers]]
   (try
-    (let [result (client/post url {:headers headers :basic-auth [token] :query-params params :throw-exceptions false})]
+    (let [result (if headers
+                   (client/post url {:debug true :headers headers :basic-auth [token] :query-params params :throw-exceptions false})
+                   (client/post url {:debug true :basic-auth [token] :query-params params :throw-exceptions false}))]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
 

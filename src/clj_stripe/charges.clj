@@ -20,8 +20,8 @@
   (apply util/merge-maps {:operation :charge} money-quantity extra-info))
 
 (defmethod execute :charge
-  [op-data & idempotency-key]
-  (util/post-request *stripe-token* (str api-root "/charges") (dissoc op-data :operation) idempotency-key))
+  [op-data & [headers]]
+  (util/post-request *stripe-token* (str api-root "/charges") (dissoc op-data :operation) headers))
 
 (defn get-charge
   "Creates a new get-charge operation.

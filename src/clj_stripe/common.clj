@@ -20,36 +20,36 @@
   [token & body]
   `(binding [*stripe-token* ~token] ~@body))
 
-(defmulti execute 
-  "Executes a Stripe API operation. 
-  All operations are defined using other clj-stripe functions that return data structures representing API calls, but that do not execute them. 
+(defmulti execute
+  "Executes a Stripe API operation.
+  All operations are defined using other clj-stripe functions that return data structures representing API calls, but that do not execute them.
   For actually making the calls to the Stripe servers the execute function must be used.
   execute expects a Stripe authentication token in the context, use the macro with-token to set the token and wrap one or several execute calls."
-  :operation)
+  (fn [x & headers] (:operation x)))
 
-(defn address1 
-  [addr] 
+(defn address1
+  [addr]
   "Defines the first line of a credit card address."
   {"card[address_line_1]" addr})
 
-(defn address2 
+(defn address2
   "Defines the second line of a credit card address."
-  [addr] 
+  [addr]
   {"card[address_line_2]" addr})
 
-(defn zip 
+(defn zip
   "Defines the zip code of a credit card address."
-  [zipcode] 
+  [zipcode]
   {"card[address_zip]" zipcode})
 
-(defn state 
+(defn state
   "Defines the state of a credit card address."
-  [addr-state] 
+  [addr-state]
   {"card[address_state]" addr-state})
 
-(defn country 
+(defn country
   "Defines the country of a credit card address."
-  [addr-country] 
+  [addr-country]
   {"card[address_country]" addr-country})
 
 (defn address
@@ -63,37 +63,37 @@
   [& elements]
   (util/merge-maps elements))
 
-(defn expiration 
-  "Defines the expiration date of a credit card. 
+(defn expiration
+  "Defines the expiration date of a credit card.
   Requires the month and the year of expiration."
-  [month year] 
+  [month year]
   {"card[exp_month]" month "card[exp_year]" year})
 
-(defn cvc 
-  "Defines the card verification code (CVC) of a credit card. 
+(defn cvc
+  "Defines the card verification code (CVC) of a credit card.
   Requires the code as parameter."
   [v]
   {"card[cvc]" v})
 
-(defn number 
-  "Defines the number of a credit card. 
+(defn number
+  "Defines the number of a credit card.
   Requires the number as parameter."
   [n]
   {"card[number]" n})
 
-(defn owner-name 
+(defn owner-name
   "Defines the name of an element."
-  [n] 
+  [n]
   {"card[name]" n})
-  
-(defn description 
+
+(defn description
   "Creates the description of an element."
   [d]
   {"description" d})
 
-(defn elem-name 
+(defn elem-name
   "Defines the name of an element."
-  [n] 
+  [n]
   {"name" n})
 
 (defn customer
@@ -119,46 +119,46 @@
 	([number expiration & extra-info] (apply util/merge-maps number expiration extra-info))
 	)
 
-(defn amount 
+(defn amount
   "Defines an amount of money, as an integer."
   [a]
   {"amount" a})
 
-(defn currency 
+(defn currency
   "Defines a currency, for example 'usd'."
-  [c] 
+  [c]
   {"currency" c})
 
-(defn money-quantity 
+(defn money-quantity
   "Defines a quantity of money, as a pair of amount and currency."
   [a c]
   (into (currency c) (amount a)))
 
-(defn offset 
+(defn offset
   "Defines an offset, for selecting where to start retrieving the elements of a list."
   [o]
   {"offset" o})
 
-(defn limit-count 
+(defn limit-count
   "Defines a count value, for selecting how many elements to retrieve from a list."
   [c]
   {"count" c})
 
-(defn position 
+(defn position
   "Defines an interval as a pair of count (see limit-count) and offset (see offset)."
   [c o]
   (into (limit-count c) (offset o)))
 
-(defn coupon 
+(defn coupon
   "Defines the name of a coupon."
-  [c] 
+  [c]
   {"coupon" c})
 
-(defn plan 
+(defn plan
   "Defines the ID of a subscription plan."
   [p]
   {"plan" p})
 
-(defn trial-end 
-  [t] 
+(defn trial-end
+  [t]
   {"trial_end" t})
