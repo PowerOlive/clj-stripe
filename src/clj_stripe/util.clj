@@ -46,7 +46,7 @@
   "POSTs a to a url using the provided authentication token and parameters."
   [token url params & headers]
   (try
-    (let [result (client/post url {:debug true :debug-body true :body :headers headers :basic-auth [token] :query-params params :throw-exceptions false})]
+    (let [result (client/post url {:debug true :debug-body true :headers headers :basic-auth [token] :query-params params :throw-exceptions false})]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
 
