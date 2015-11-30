@@ -6,3 +6,4 @@ pom.xml
 *~
 /src/clj-stripe/stripe.cjl*
 /target
+pom.xml.asc

@@ -47,7 +47,7 @@
   [token url params & idempotency-key]
   (try
     (let [result (if idempotency-key
-                   (client/post url {:Idempotency-Key idempotency-key :basic-auth [token] :query-params params :throw-exceptions false})
+                   (client/post url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :query-params params :throw-exceptions false})
                    (client/post url {:basic-auth [token] :query-params params :throw-exceptions false}))]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
@@ -57,7 +57,7 @@
   [token url & idempotency-key]
   (try
     (let [result (if idempotency-key
-                   (client/get url {:Idempotency-Key idempotency-key :basic-auth [token] :throw-exceptions false})
+                   (client/get url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :throw-exceptions false})
                    (client/get url {:basic-auth [token] :throw-exceptions false}))]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
@@ -67,7 +67,7 @@
   [token url & idempotency-key]
   (try
     (let [result (if idempotency-key
-                   (client/delete url {:Idempotency-Key idempotency-key :basic-auth [token] :throw-exceptions false})
+                   (client/delete url {:headers {"Idempotency-Key" idempotency-key} :basic-auth [token] :throw-exceptions false})
                    (client/delete url {:basic-auth [token] :throw-exceptions false}))]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
