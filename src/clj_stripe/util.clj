@@ -46,15 +46,13 @@
   "POSTs a to a url using the provided authentication token and parameters."
   [token url params & [headers]]
   (try
-    (let [result (if headers
-                   (client/post url {:debug true :headers headers :basic-auth [token] :query-params params :throw-exceptions false})
-                   (client/post url {:debug true :basic-auth [token] :query-params params :throw-exceptions false}))]
+    (let [result (client/post url {:debug true :headers headers :basic-auth [token] :query-params params :throw-exceptions false})]
       (json/read-json (:body result)))
     (catch java.lang.Exception e e)))
 
 (defn get-request
   "Issues a GET request to the specified url, using the provided authentication token and parameters."
-  [token url & headers]
+  [token url & [headers]]
   (try
     (let [result (client/get url {:headers headers :basic-auth [token] :throw-exceptions false})]
       (json/read-json (:body result)))
@@ -62,7 +60,7 @@
 
 (defn delete-request
   "Issues a DELETE request to the specified url, using the provided authentication token and parameters."
-  [token url & headers]
+  [token url & [headers]]
   (try
     (let [result (client/delete url {:headers headers :basic-auth [token] :throw-exceptions false})]
       (json/read-json (:body result)))

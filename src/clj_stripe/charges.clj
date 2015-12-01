@@ -54,5 +54,5 @@
   ([charge-id amount] (util/merge-maps {:operation :refund-charge "id" charge-id } amount)))
 
 (defmethod execute :refund-charge
-  [op-data & idempotency-key]
-  (util/post-request *stripe-token* (str api-root "/charges/" (get op-data "id") "/refund") (dissoc op-data "id" :operation) idempotency-key))
+  [op-data & [headers]]
+  (util/post-request *stripe-token* (str api-root "/charges/" (get op-data "id") "/refund") (dissoc op-data "id" :operation) headers))
