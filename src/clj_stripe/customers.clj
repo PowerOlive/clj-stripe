@@ -29,7 +29,9 @@
   [& extra-info]
   (apply util/merge-maps {:operation :create-customer} extra-info))
 
-(defmethod execute :create-customer [op-data] (util/post-request *stripe-token* (str api-root "/customers") (dissoc op-data :operation)))
+(defmethod execute :create-customer
+  [op-data & [headers]]
+  (util/post-request *stripe-token* (str api-root "/customers") (dissoc op-data :operation) headers))
 
 (defn get-customer
   "Creates a get-customer operation.
@@ -39,7 +41,7 @@
   {:operation :get-customer :customer-id customer-id})
 
 (defmethod execute :get-customer
-  [op-data] 
+  [op-data]
   (util/get-request *stripe-token* (str api-root "/customers/" (get op-data :customer-id))))
 
 (defn get-customers
@@ -73,9 +75,9 @@
   "Creates an delete-customer operation.
   Requires the customer id as a string.
   Execute with common/execute."
-  [customer-id]
+  [customer-id & [headers]]
   {:operation :delete-customer :customer-id customer-id})
 
 (defmethod execute :delete-customer
-  [op-data]
-  (util/delete-request *stripe-token* (str api-root "/customers/" (get op-data :customer-id))))
+  [op-data & [headers]]
+  (util/delete-request *stripe-token* (str api-root "/customers/" (get op-data :customer-id)) headers))
