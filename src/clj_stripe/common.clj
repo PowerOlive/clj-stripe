@@ -37,7 +37,12 @@
   [addr]
   {"card[address_line_2]" addr})
 
-(defn zip
+(defn city
+  "Defines the city of a credit card address."
+  [city]
+  {"card[address_city]" city})
+
+(defn zip 
   "Defines the zip code of a credit card address."
   [zipcode]
   {"card[address_zip]" zipcode})
