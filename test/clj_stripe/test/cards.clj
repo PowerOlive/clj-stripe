@@ -21,13 +21,13 @@
 
   (def token-response (execute create-token-op))
   (def generalized-token-response (-> token-response
-                                    (dissoc :id :created :client_ip)
-                                    (update-in [:card] dissoc :id :fingerprint)))
+                                      (dissoc :id :created :client_ip)
+                                      (update-in [:card] dissoc :id :fingerprint)))
 
   (test/deftest
     card-token-exec
     (test/is (and (= generalized-token-response
-                    {:object "token", :card {:country "US", :metadata {}, :dynamic_last4 nil, :exp_month 12, :last4 "4242", :address_zip_check nil, :name "Mr. Owner", :address_line2 nil,  :cvc_check "unchecked", :address_line1 nil, :object "card", :address_city nil, :address_zip nil, :tokenization_method nil, :address_state nil, :address_line1_check nil, :brand "Visa", :exp_year 2020, :address_country nil,  :funding "credit"}, :livemode false, :type "card", :used false}))))
+                     {:object "token", :card {:country "US", :metadata {}, :dynamic_last4 nil, :exp_month 12, :last4 "4242", :address_zip_check nil, :name "Mr. Owner", :address_line2 nil,  :cvc_check "unchecked", :address_line1 nil, :object "card", :address_city nil, :address_zip nil, :tokenization_method nil, :address_state nil, :address_line1_check nil, :brand "Visa", :exp_year 2020, :address_country nil,  :funding "credit"}, :livemode false, :type "card", :used false}))))
 
 
   (def get-token-op (get-card-token (:id token-response)))

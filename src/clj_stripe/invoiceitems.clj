@@ -7,7 +7,6 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.invoiceitems
-    "Functions for Stripe Invoice Items API"
     (:use clj-stripe.common)
     (:require [clj-stripe.util :as util]))
 

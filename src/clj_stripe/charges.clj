@@ -7,7 +7,6 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.charges
-    "Functions for Stripe Charges API"
     (:use clj-stripe.common)
     (:require [clj-stripe.util :as util]))
 

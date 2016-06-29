@@ -7,11 +7,10 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.customers
-    "Functions for Stripe Customers API"
     (:use clj-stripe.common)
     (:require [clj-stripe.util :as util]))
 
-(defn email 
+(defn email
   "Creates the data representation of a customer's email address."
   [e]
   {"email" e})

@@ -7,9 +7,8 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.cards
-    "Functions for Stripe Cards API"
-    (:use clj-stripe.common)
-    (:require [clj-stripe.util :as util]))
+  (:use clj-stripe.common)
+  (:require [clj-stripe.util :as util]))
 
 (defn create-card-token
   "Creates a create-card-token operation.

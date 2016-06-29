@@ -28,8 +28,7 @@
 
   (test/deftest customers-test
     (test/is (= get-customer-result customer-result))
-    (test/is (some #{(:id get-customer-result)} (map :id (:data get-all-customers-result))))
-    )
+    (test/is (some #{(:id get-customer-result)} (map :id (:data get-all-customers-result)))))
 
   (def new-email (email "a new email"))
   (def update-customer-op (update-customer (:id customer-result) new-email))

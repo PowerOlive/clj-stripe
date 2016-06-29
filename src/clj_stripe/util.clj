@@ -7,7 +7,7 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.util
-	(:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]))
 
 (defn keys-2-strings
   "Converts all the keys of a map from keywords to strings."

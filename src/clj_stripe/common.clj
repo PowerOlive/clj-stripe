@@ -7,7 +7,6 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clj-stripe.common
-    "Common functions for Stripe API"
     (:require [clj-stripe.util :as util]))
 
 ;; Root URL for the API calls
